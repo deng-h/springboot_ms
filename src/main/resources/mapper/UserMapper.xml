@@ -8,8 +8,8 @@
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
             <result property="password" column="password" jdbcType="VARCHAR"/>
-            <result property="is_admin" column="is_admin" jdbcType="TINYINT"/>
-            <result property="is_deleted" column="is_deleted" jdbcType="TINYINT"/>
+            <result property="isAdmin" column="is_admin" jdbcType="TINYINT"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">

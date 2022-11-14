@@ -6,18 +6,18 @@
 
     <resultMap id="BaseResultMap" type="com.dh.ms.pojo.PedalFixedParam">
             <id property="id" column="id" jdbcType="VARCHAR"/>
-            <result property="bluetooth_mac_address" column="bluetooth_mac_address" jdbcType="VARCHAR"/>
-            <result property="pedal_model" column="pedal_model" jdbcType="VARCHAR"/>
-            <result property="output_block_current" column="output_block_current" jdbcType="VARCHAR"/>
-            <result property="input_block_current" column="input_block_current" jdbcType="VARCHAR"/>
-            <result property="guard_time" column="guard_time" jdbcType="VARCHAR"/>
-            <result property="low_voltage_lower_limit" column="low_voltage_lower_limit" jdbcType="VARCHAR"/>
-            <result property="low_voltage_upper_limit" column="low_voltage_upper_limit" jdbcType="VARCHAR"/>
-            <result property="start_voltage_lower_limit" column="start_voltage_lower_limit" jdbcType="VARCHAR"/>
-            <result property="start_voltage_upper_limit" column="start_voltage_upper_limit" jdbcType="VARCHAR"/>
-            <result property="is_deleted" column="is_deleted" jdbcType="TINYINT"/>
-            <result property="gmt_create" column="gmt_create" jdbcType="TIMESTAMP"/>
-            <result property="gmt_modified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+            <result property="bluetoothMacAddress" column="bluetooth_mac_address" jdbcType="VARCHAR"/>
+            <result property="pedalModel" column="pedal_model" jdbcType="VARCHAR"/>
+            <result property="outputBlockCurrent" column="output_block_current" jdbcType="VARCHAR"/>
+            <result property="inputBlockCurrent" column="input_block_current" jdbcType="VARCHAR"/>
+            <result property="guardTime" column="guard_time" jdbcType="VARCHAR"/>
+            <result property="lowVoltageLowerLimit" column="low_voltage_lower_limit" jdbcType="VARCHAR"/>
+            <result property="lowVoltageUpperLimit" column="low_voltage_upper_limit" jdbcType="VARCHAR"/>
+            <result property="startVoltageLowerLimit" column="start_voltage_lower_limit" jdbcType="VARCHAR"/>
+            <result property="startVoltageUpperLimit" column="start_voltage_upper_limit" jdbcType="VARCHAR"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
