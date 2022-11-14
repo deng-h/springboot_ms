@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dh.ms.mapper.PedalRealParamMapper">
+
+    <resultMap id="BaseResultMap" type="com.dh.ms.pojo.PedalRealParam">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="bluetoothMacAddress" column="bluetooth_mac_address" jdbcType="VARCHAR"/>
+            <result property="pedalModel" column="pedal_model" jdbcType="VARCHAR"/>
+            <result property="pedalSwitchStatus" column="pedal_switch_status" jdbcType="VARCHAR"/>
+            <result property="realtimeVoltage" column="realtime_voltage" jdbcType="VARCHAR"/>
+            <result property="leftDoorStatus" column="left_door_status" jdbcType="VARCHAR"/>
+            <result property="leftPedalStatus" column="left_pedal_status" jdbcType="VARCHAR"/>
+            <result property="rightDoorStatus" column="right_door_status" jdbcType="VARCHAR"/>
+            <result property="rightPedalStatus" column="right_pedal_status" jdbcType="VARCHAR"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,bluetooth_mac_address,pedal_model,
+        pedal_switch_status,realtime_voltage,left_door_status,
+        left_pedal_status,right_door_status,right_pedal_status,
+        is_deleted,gmt_create,gmt_modified
+    </sql>
+</mapper>

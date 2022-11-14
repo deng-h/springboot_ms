@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dh.ms.mapper.PedalFixedParamMapper">
+
+    <resultMap id="BaseResultMap" type="com.dh.ms.pojo.PedalFixedParam">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="bluetooth_mac_address" column="bluetooth_mac_address" jdbcType="VARCHAR"/>
+            <result property="pedal_model" column="pedal_model" jdbcType="VARCHAR"/>
+            <result property="output_block_current" column="output_block_current" jdbcType="VARCHAR"/>
+            <result property="input_block_current" column="input_block_current" jdbcType="VARCHAR"/>
+            <result property="guard_time" column="guard_time" jdbcType="VARCHAR"/>
+            <result property="low_voltage_lower_limit" column="low_voltage_lower_limit" jdbcType="VARCHAR"/>
+            <result property="low_voltage_upper_limit" column="low_voltage_upper_limit" jdbcType="VARCHAR"/>
+            <result property="start_voltage_lower_limit" column="start_voltage_lower_limit" jdbcType="VARCHAR"/>
+            <result property="start_voltage_upper_limit" column="start_voltage_upper_limit" jdbcType="VARCHAR"/>
+            <result property="is_deleted" column="is_deleted" jdbcType="TINYINT"/>
+            <result property="gmt_create" column="gmt_create" jdbcType="TIMESTAMP"/>
+            <result property="gmt_modified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,bluetooth_mac_address,pedal_model,
+        output_block_current,input_block_current,guard_time,
+        low_voltage_lower_limit,low_voltage_upper_limit,start_voltage_lower_limit,
+        start_voltage_upper_limit,is_deleted,gmt_create,
+        gmt_modified
+    </sql>
+
+</mapper>
