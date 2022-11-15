@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @CrossOrigin
 public class UserController {
 
@@ -19,18 +19,18 @@ public class UserController {
         return this.userService.addUser(ruleForm);
     }
 
-    @GetMapping("/delete")
-    public ResultVO deleteUserByName(String id){
+    @DeleteMapping("/{id}")
+    public ResultVO deleteUserByName(@PathVariable("id") String id){
         return this.userService.deleteUserByID(id);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResultVO getAllUsers(){
         return this.userService.getAllUsers();
     }
 
-    @GetMapping("/query")
-    public ResultVO queryUser(@RequestParam String name, @RequestParam String userType){
+    @GetMapping("/{name}/{userType}")
+    public ResultVO queryUser(@PathVariable("name") String name, @PathVariable("userType") String userType){
         return this.userService.queryUser(name, userType);
     }
 

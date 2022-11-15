@@ -13,8 +13,8 @@ public class PedalFixedController {
     @Autowired
     private PedalFixedParamService pedalFixedParamService;
 
-    @GetMapping("/page")
-    public ResultVO page(@RequestParam Integer pageNum, @RequestParam Integer pageSize){
+    @GetMapping("/{pageNum}/{pageSize}")
+    public ResultVO page(@PathVariable("pageNum") Integer pageNum, @PathVariable("pageSize") Integer pageSize){
         return this.pedalFixedParamService.page(pageNum, pageSize);
     }
 

@@ -77,6 +77,13 @@
 			<version>3.4.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+<!--			该依赖是否可以传递 为true不能传递 只能当前项目使用-->
+			<optional>true</optional>
+		</dependency>
+
 	</dependencies>
 
 	<build>

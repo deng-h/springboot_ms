@@ -63,7 +63,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public ResultVO addUser(RuleForm ruleForm) {
         ResultVO resultVO = new ResultVO();
         User user = new User();
-        System.out.println(ruleForm);
         user.setName(ruleForm.getUserName());
         user.setPassword(ruleForm.getPassword());
         String userType = ruleForm.getUserType();
