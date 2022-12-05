@@ -12,7 +12,7 @@ public class PedalRealController {
     @Autowired
     private PedalRealParamService pedalRealParamService;
 
-    @GetMapping("/{pageNum}/{pageSize}")
+    @GetMapping("/page//{pageNum}/{pageSize}")
     public ResultVO page(@PathVariable("pageNum") Integer pageNum, @PathVariable("pageSize") Integer pageSize){
         return this.pedalRealParamService.page(pageNum, pageSize);
     }

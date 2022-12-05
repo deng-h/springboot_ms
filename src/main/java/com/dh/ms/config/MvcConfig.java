@@ -16,7 +16,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new JWTInterceptor())  // 指定拦截器
-                .excludePathPatterns("/login")   // 排除登录页
+                .excludePathPatterns("/login", "/ws")   // 排除登录页
                 .addPathPatterns("/**")   // 拦截其他
                 .order(1);   // 指定拦截器执行顺序
     }

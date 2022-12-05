@@ -14,7 +14,6 @@ public class ResultVO {
     private Integer code;
     private String msg;
     private Object data;
-
     public static ResultVO success(String msg){
         return new ResultVO(200, msg, null);
     }

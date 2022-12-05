@@ -14,7 +14,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/add")
+    @PostMapping
     public ResultVO addUser(@RequestBody RuleForm ruleForm){
         return this.userService.addUser(ruleForm);
     }

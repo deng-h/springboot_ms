@@ -3,13 +3,17 @@ package com.dh.ms.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dh.ms.Utils.JWTUtils;
+import com.dh.ms.form.LoginUser;
 import com.dh.ms.form.RuleForm;
-import com.dh.ms.form.UserForm;
 import com.dh.ms.pojo.User;
 import com.dh.ms.service.UserService;
 import com.dh.ms.mapper.UserMapper;
 import com.dh.ms.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -28,34 +32,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public ResultVO login(RuleForm ruleForm) {
         ResultVO resultVO = new ResultVO();
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("name",ruleForm.getUserName());
-        User user = this.userMapper.selectOne(queryWrapper);
+        //将用户信息封装一下
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(ruleForm.getUsername(),ruleForm.getPassword());
+        Authentication authenticate = authenticationManager.authenticate(authenticationToken);  // 进行用户认证
 
-        //判断是否有该用户
-        if(user != null){
-            // 判断密码是否正确
-            if (Objects.equals(user.getPassword(), ruleForm.getPassword())){
-                // 判断用户类型
-                int isAdmin = Integer.parseInt(Objects.equals(ruleForm.getUserType(), "管理员") ? "1" : "0");
-                if(Objects.equals(isAdmin,user.getIsAdmin())){
-                    Map<String, String> map = new HashMap<>();  // 用来存放payload
-                    map.put("id", user.getId());
-                    map.put("userName", user.getName());
-                    String token = JWTUtils.getToken(map);  // 生成Token
-                    resultVO = ResultVO.success("登录成功",token);  // 返回Token
-                }else{
-                    resultVO = ResultVO.error("用户类型错误");
-                }
-            }else {
-                resultVO = ResultVO.error("密码错误");
-            }
-        }else{
-            resultVO = ResultVO.error("账号错误");
+        if(Objects.isNull(authenticate)){
+            throw new RuntimeException("登录失败");
         }
+
+        Map<String, String> map = new HashMap<>();  // 用来存放payload
+        LoginUser loginUser = (LoginUser)authenticate.getPrincipal();
+        String id = loginUser.getUser().getId();
+        String name = loginUser.getUser().getName();
+        map.put("id", id);
+        map.put("name", name);
+        String token = JWTUtils.getToken(map);  // 生成Token
+        resultVO = ResultVO.success("登录成功",token);  // 返回Token
         return resultVO;
     }
 
@@ -63,8 +64,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public ResultVO addUser(RuleForm ruleForm) {
         ResultVO resultVO = new ResultVO();
         User user = new User();
-        user.setName(ruleForm.getUserName());
-        user.setPassword(ruleForm.getPassword());
+        user.setName(ruleForm.getUsername());
+        String passwordEncode = this.passwordEncoder.encode(ruleForm.getPassword());  //  密码加密
+        user.setPassword(passwordEncode);
         String userType = ruleForm.getUserType();
         if(Objects.equals(userType, "普通用户")){
             user.setIsAdmin(0);
@@ -119,7 +121,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         ResultVO resultVO = new ResultVO();
         User user = new User();
         user.setId(ruleForm.getId());
-        user.setName(ruleForm.getUserName());
+        user.setName(ruleForm.getUsername());
         user.setPassword(ruleForm.getPassword());
         user.setIsDeleted(0);
         int isAdmin = Integer.parseInt(Objects.equals(ruleForm.getUserType(),"管理员") ? "1" : "0");
