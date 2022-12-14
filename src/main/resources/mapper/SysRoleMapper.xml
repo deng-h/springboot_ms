@@ -20,4 +20,10 @@
         sort,status,deleted,
         create_time,update_time
     </sql>
+
+    <select id="selectCodeById" resultType="java.lang.String">
+        select code
+        from sys_role
+        where id = #{id,jdbcType=NUMERIC}
+    </select>
 </mapper>

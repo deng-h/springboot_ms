@@ -6,14 +6,18 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
+
+import lombok.*;
 
 /**
  * 菜单管理
  * @TableName sys_menu
  */
 @TableName(value ="sys_menu")
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class SysMenu implements Serializable {
     /**
      * 
@@ -123,47 +127,4 @@ public class SysMenu implements Serializable {
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()));
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
-        result = prime * result + ((getPath() == null) ? 0 : getPath().hashCode());
-        result = prime * result + ((getComponent() == null) ? 0 : getComponent().hashCode());
-        result = prime * result + ((getPerm() == null) ? 0 : getPerm().hashCode());
-        result = prime * result + ((getVisible() == null) ? 0 : getVisible().hashCode());
-        result = prime * result + ((getSort() == null) ? 0 : getSort().hashCode());
-        result = prime * result + ((getIcon() == null) ? 0 : getIcon().hashCode());
-        result = prime * result + ((getRedirectUrl() == null) ? 0 : getRedirectUrl().hashCode());
-        result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
-        result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", parentId=").append(parentId);
-        sb.append(", name=").append(name);
-        sb.append(", type=").append(type);
-        sb.append(", path=").append(path);
-        sb.append(", component=").append(component);
-        sb.append(", perm=").append(perm);
-        sb.append(", visible=").append(visible);
-        sb.append(", sort=").append(sort);
-        sb.append(", icon=").append(icon);
-        sb.append(", redirectUrl=").append(redirectUrl);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
 }

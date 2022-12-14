@@ -2,7 +2,10 @@ package com.dh.ms.service;
 
 import com.dh.ms.pojo.entity.SysMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.dh.ms.pojo.vo.menu.ResourceVO;
+import com.dh.ms.pojo.vo.menu.RouteVO;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,12 +16,12 @@ import java.util.Set;
 
 /**
  * 菜单业务接口
- *
  */
 public interface SysMenuService extends IService<SysMenu> {
 
-    /**
-     * 获取角色权限集合
-     */
-    Set<String> listRolePerms(Set<String> roles);
+    Set<String> listRolePerms(Set<String> roles);  // 获取角色权限集合
+
+    List<ResourceVO> listResources();  // 资源(菜单+权限)树形列表
+
+    List<RouteVO> listRoutes();  // 获取路由列表
 }

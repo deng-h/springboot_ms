@@ -1,5 +1,6 @@
 package com.dh.ms.mapper;
 
+import com.dh.ms.pojo.bo.UserAuthInfo;
 import com.dh.ms.pojo.entity.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Repository;
 */
 @Repository
 public interface SysUserMapper extends BaseMapper<SysUser> {
-
+    UserAuthInfo getUserAuthInfo(String username);  // 根据用户名获取认证信息
 }
 
 

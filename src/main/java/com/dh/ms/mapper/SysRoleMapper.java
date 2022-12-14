@@ -1,7 +1,12 @@
 package com.dh.ms.mapper;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.dh.ms.pojo.entity.SysRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
 * @author dell
@@ -9,8 +14,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2022-12-12 14:19:30
 * @Entity com.dh.ms.pojo.entity.SysRole
 */
+@Repository
 public interface SysRoleMapper extends BaseMapper<SysRole> {
-
+    Set<String> selectCodeById(@Param("id") Long id);
 }
 
 

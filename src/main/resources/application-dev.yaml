@@ -1,0 +1,35 @@
+server:
+  port: 8181
+
+spring:
+  # 数据库配置
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/managementsystem?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 1234
+
+  #redis配置
+  redis:
+    host: 192.168.59.129
+    port: 6379
+    database: 0  # 默认0号库
+    timeout: 10s
+    lettuce:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1ms
+
+# 认证配置
+auth:
+  token:
+    secret_key: SecretKey012345678901234567890123456789012345678901234567890123456789
+    # token 有效期(单位:秒)
+    token_validity: 18000
+
+mybatis-plus:
+  global-config:
+    banner: false  # 启动/关闭控制台 MyBatis Plus LOGO

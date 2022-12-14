@@ -2,6 +2,7 @@ package com.dh.ms.mapper;
 
 import com.dh.ms.pojo.entity.SysUserRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
 * @author dell
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2022-12-12 14:22:12
 * @Entity com.dh.ms.pojo.entity.SysUserRole
 */
+@Repository
 public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
 
 }

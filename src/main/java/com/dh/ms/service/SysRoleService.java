@@ -2,6 +2,9 @@ package com.dh.ms.service;
 
 import com.dh.ms.pojo.entity.SysRole;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Set;
 
 /**
 * @author dell
@@ -9,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2022-12-12 14:19:30
 */
 public interface SysRoleService extends IService<SysRole> {
-
+    Set<String> selectCodeById(long id);
 }
