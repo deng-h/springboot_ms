@@ -25,8 +25,6 @@ public class UserAuthInfo {
 
     private Integer status;
 
-    private Long roleId;
-
     private Set<String> roles;  // 不会使用多表联查 Set集合类型没搞明白
 
     private Set<String> perms;

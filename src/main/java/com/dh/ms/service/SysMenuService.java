@@ -1,7 +1,10 @@
 package com.dh.ms.service;
 
+import com.dh.ms.common.model.Option;
 import com.dh.ms.pojo.entity.SysMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.dh.ms.pojo.query.MenuQuery;
+import com.dh.ms.pojo.vo.menu.MenuVO;
 import com.dh.ms.pojo.vo.menu.ResourceVO;
 import com.dh.ms.pojo.vo.menu.RouteVO;
 
@@ -24,4 +27,12 @@ public interface SysMenuService extends IService<SysMenu> {
     List<ResourceVO> listResources();  // 资源(菜单+权限)树形列表
 
     List<RouteVO> listRoutes();  // 获取路由列表
+
+    List<MenuVO> listMenus(MenuQuery queryParams);  // // 菜单表格树形列表
+
+    List<Option> listMenuOptions();
+
+    boolean saveMenu(SysMenu menu);
+
+    boolean updateMenuVisible(Long menuId, Integer visible);
 }

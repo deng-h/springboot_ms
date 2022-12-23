@@ -52,10 +52,11 @@ public class JwtTokenManager {
         SysUserDetails userDetails = (SysUserDetails) authentication.getPrincipal();  // 获取当前用户的信息
         claims.put("userId", userDetails.getUserId());
         claims.put("username", claims.getSubject());
-        // 由简单的string类型表示的角色信息 转为 由SimpleGrantedAuthority类型表示的角色信息
+
         Set<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
         Set<String> authorities = userDetails.getPerms();
         authorities.addAll(roles);  // 将集合roles的元素追加到authorities中
+        // 像这样["java.util.HashSet",["sys:user:edit","sys:user:delete","sys:user:add","ROLE_TEST","ROLE_ADMIN","ROLE_DEVELOP"]]
         // 角色信息和权限信息一起放到redis中
         redisTemplate.opsForValue().set("USER_PERMS:" + userDetails.getUserId(), authorities);
         return Jwts.builder()

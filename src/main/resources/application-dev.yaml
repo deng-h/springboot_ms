@@ -12,7 +12,7 @@ spring:
 
   #redis配置
   redis:
-    host: 192.168.59.129
+    host: 192.168.59.100
     port: 6379
     database: 0  # 默认0号库
     timeout: 10s
@@ -26,7 +26,7 @@ spring:
 # 认证配置
 auth:
   token:
-    secret_key: SecretKey012345678901234567890123456789012345678901234567890123456789
+    secret_key: SecretKey0123456789managementsystemdh9876543210
     # token 有效期(单位:秒)
     token_validity: 18000
 

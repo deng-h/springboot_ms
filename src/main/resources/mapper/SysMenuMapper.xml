@@ -43,8 +43,8 @@
                 t1.perm IS NOT NULL
             AND
                 t3.`code` IN
-                    <foreach collection="roles" item="role" separator="," open="(" close=")">
-                        #{roles}
+                    <foreach collection="roles" item="role"  open="(" separator="," close=")">
+                        #{role}
                     </foreach>
 -- choose 标签作用是通过条件判断来拼接SQL语句，类似于Java中的switch语句
 -- 从上到下，当有匹配的条件时，跳出choose语句

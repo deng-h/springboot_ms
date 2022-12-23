@@ -39,6 +39,7 @@ public class SysUserDetails implements UserDetails {
         this.userId = user.getUserId();
         Set<String> roles = user.getRoles();
         Set<SimpleGrantedAuthority> authorities;
+        // 把字符串形式表示的角色信息转为SimpleGrantedAuthority类型的角色信息
         if (CollectionUtil.isNotEmpty(roles)) {
             authorities = roles.stream()
                     .map(role -> new SimpleGrantedAuthority("ROLE_" + role)) // 标识角色

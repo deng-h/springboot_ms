@@ -2,18 +2,18 @@ package com.dh.ms.controller;
 
 import com.dh.ms.common.result.Result;
 import com.dh.ms.security.jwt.JwtTokenManager;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@Api(tags = "认证管理")
 @RestController
-@RequestMapping
+@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
@@ -22,6 +22,7 @@ public class AuthController {
     @Autowired
     private JwtTokenManager jwtTokenManager;
 
+    @ApiOperation(value = "登录",notes = "生成token")
     @PostMapping("/login")
     public Result login(@RequestParam String username, @RequestParam String password) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
@@ -29,5 +30,12 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtTokenManager.createToken(authentication);
         return Result.success("Bearer " + token);
+    }
+
+    @ApiOperation(value = "注销")
+    @DeleteMapping("/logout")
+    public Result logout() {
+        SecurityContextHolder.clearContext();
+        return Result.success("注销成功");
     }
 }

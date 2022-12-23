@@ -1,9 +1,15 @@
 package com.dh.ms.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.dh.ms.common.model.Option;
 import com.dh.ms.pojo.entity.SysRole;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.dh.ms.pojo.form.RoleForm;
+import com.dh.ms.pojo.query.RolePageQuery;
+import com.dh.ms.pojo.vo.role.RolePageVO;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,4 +19,16 @@ import java.util.Set;
 */
 public interface SysRoleService extends IService<SysRole> {
     Set<String> selectCodeById(long id);
+
+    List<Option> listRoleOptions();
+
+    Page<RolePageVO> listRolePages(RolePageQuery queryParams);
+
+    boolean saveRole(RoleForm roleForm);
+
+    boolean deleteRoles(String ids);
+
+    boolean updateRoleMenus(Long roleId, List<Long> menuIds);
+
+    List<Long> getRoleMenuIds(Long roleId);
 }

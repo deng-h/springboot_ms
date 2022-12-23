@@ -16,12 +16,12 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring")
 public interface UserConverter {
 
-//    @Mappings({
-//            @Mapping(target = "genderLabel", expression = "java(com.dh.ms.common.base.IBaseEnum.getLabelByValue(po.getGender(), com.dh.ms.common.enums.GenderEnum.class))")
-//    })
-//    UserVO po2Vo(UserBO po);
-//
-//    Page<UserVO> po2Vo(Page<UserBO> po);
+    @Mappings({
+            @Mapping(target = "genderLabel", expression = "java(com.dh.ms.common.base.IBaseEnum.getLabelByValue(po.getGender(), com.dh.ms.common.enums.GenderEnum.class))")
+    })
+    UserVO po2Vo(UserBO po);
+
+    Page<UserVO> po2Vo(Page<UserBO> po);
 
     UserForm po2Form(UserFormBO po);
 

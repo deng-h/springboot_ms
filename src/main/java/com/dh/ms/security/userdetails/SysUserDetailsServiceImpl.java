@@ -1,6 +1,5 @@
 package com.dh.ms.security.userdetails;
 
-import cn.hutool.core.collection.CollectionUtil;
 import com.dh.ms.pojo.bo.UserAuthInfo;
 import com.dh.ms.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +18,12 @@ public class SysUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserAuthInfo userAuthInfo = this.sysUserService.getUserAuthInfo(username);
-        Set<String> perms = userAuthInfo.getPerms();
-        if(CollectionUtil.isEmpty(perms)){
-            System.out.println("perms is empty!");
-        }
+        UserAuthInfo userAuthInfo = sysUserService.getUserAuthInfo(username);  // 获取数据库中的用户相关信息
         if (userAuthInfo == null) {
             throw new UsernameNotFoundException(username);
         }
+
+        // 将系统用户的所有相关信息封装为UserDetails对象返回
         return new SysUserDetails(userAuthInfo);
     }
 }

@@ -2,6 +2,7 @@ package com.dh.ms.common.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.dh.ms.common.base.IBaseEnum;
+import lombok.Data;
 import lombok.Getter;
 
 public enum MenuTypeEnum implements IBaseEnum<Integer> {
@@ -22,5 +23,9 @@ public enum MenuTypeEnum implements IBaseEnum<Integer> {
     MenuTypeEnum(Integer value, String label) {
         this.value = value;
         this.label = label;
+    }
+
+    MenuTypeEnum(Integer value) {
+        this.value = value;
     }
 }
