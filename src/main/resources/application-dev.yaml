@@ -8,20 +8,25 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/managementsystem?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false
     username: root
-    password: 1234
+    password: 123456
+
+  # 统一将后端数据值转为字符串类型返回给前端
+#  jackson:
+#    generator:
+#      write-numbers-as-strings: true
 
   #redis配置
   redis:
-    host: 192.168.59.100
+    host: 192.168.222.128
     port: 6379
     database: 0  # 默认0号库
     timeout: 10s
-    lettuce:
+    jedis:
       pool:
         min-idle: 0
-        max-idle: 8
-        max-active: 8
-        max-wait: -1ms
+        max-idle: 20
+        max-active: 200
+        max-wait: 3000ms
 
 # 认证配置
 auth:
@@ -32,4 +37,7 @@ auth:
 
 mybatis-plus:
   global-config:
+    db-config:
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
     banner: false  # 启动/关闭控制台 MyBatis Plus LOGO

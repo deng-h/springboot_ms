@@ -25,11 +25,12 @@ public class PedalFixedParamServiceImpl extends ServiceImpl<PedalFixedParamMappe
      */
     @Override
     public IPage<PedalFixedParam> listFixedParamPages(PedalPageQuery queryParams) {
+        // 查询参数
         int pageNum = queryParams.getPageNum();
         int pageSize = queryParams.getPageSize();
         // 查询数据
-        Page<PedalFixedParam> paramPage = this.page(new Page<>(pageNum, pageSize));
-        return paramPage;
+        Page<PedalFixedParam> page = this.page(new Page<>(pageNum, pageSize));
+        return page;
     }
 }
 

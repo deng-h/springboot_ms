@@ -3,7 +3,7 @@ package com.dh.ms.filter;
 import cn.hutool.core.util.StrUtil;
 import com.dh.ms.common.result.ResultCode;
 import com.dh.ms.security.jwt.JwtTokenManager;
-import com.dh.ms.util.ResponseUtils;
+import com.dh.ms.utils.ResponseUtils;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,11 +28,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         if(HttpMethod.OPTIONS.matches(request.getMethod())){
-            filterChain.doFilter(request, response);  // 放行
+            // 放行
+            filterChain.doFilter(request, response);
             return;
         }
 
-        String jwt = resolveToken(request);  // token前缀是Bearer 剥离Bearer获得真正的token信息
+        // token前缀是Bearer 剥离Bearer获得真正的token信息
+        String jwt = resolveToken(request);
         if (StrUtil.isNotBlank(jwt) && SecurityContextHolder.getContext().getAuthentication() == null) {
             try {
                 this.jwtTokenManager.validateToken(jwt);

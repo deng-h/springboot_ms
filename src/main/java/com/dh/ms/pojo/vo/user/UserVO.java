@@ -1,10 +1,9 @@
 package com.dh.ms.pojo.vo.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.*;
 
 import java.util.Date;
 
@@ -13,7 +12,10 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class UserVO {
+    // 将后端数据值转为字符串类型返回给前端
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     private String username;

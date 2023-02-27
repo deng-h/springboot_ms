@@ -1,7 +1,7 @@
 package com.dh.ms.security.exception;
 
 import com.dh.ms.common.result.ResultCode;
-import com.dh.ms.util.ResponseUtils;
+import com.dh.ms.utils.ResponseUtils;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;

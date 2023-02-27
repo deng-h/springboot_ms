@@ -77,10 +77,7 @@ public class SysUserController {
 
     @ApiOperation(value = "修改用户密码")
     @PatchMapping(value = "/{userId}/password")
-    public Result updatePassword(
-            @ApiParam("用户ID") @PathVariable Long userId,
-            @RequestParam String password
-    ) {
+    public Result updatePassword(@ApiParam("用户ID") @PathVariable Long userId, @RequestParam String password) {
         boolean result = userService.updatePassword(userId, password);
         return Result.judge(result);
     }

@@ -18,7 +18,8 @@ public class SysUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserAuthInfo userAuthInfo = sysUserService.getUserAuthInfo(username);  // 获取数据库中的用户相关信息
+        // 获取数据库中的用户相关信息
+        UserAuthInfo userAuthInfo = sysUserService.getUserAuthInfo(username);
         if (userAuthInfo == null) {
             throw new UsernameNotFoundException(username);
         }

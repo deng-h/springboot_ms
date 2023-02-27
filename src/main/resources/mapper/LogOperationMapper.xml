@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dh.ms.mapper.LogOperationMapper">
+
+    <resultMap id="BaseResultMap" type="com.dh.ms.log.entities.LogOperation">
+            <id property="id" column="id" jdbcType="CHAR"/>
+            <result property="logType" column="log_type" jdbcType="VARCHAR"/>
+            <result property="logName" column="log_name" jdbcType="VARCHAR"/>
+            <result property="userId" column="user_id" jdbcType="CHAR"/>
+            <result property="username" column="username" jdbcType="VARCHAR"/>
+            <result property="className" column="class_name" jdbcType="VARCHAR"/>
+            <result property="methodName" column="method_name" jdbcType="VARCHAR"/>
+            <result property="succeed" column="succeed" jdbcType="VARCHAR"/>
+            <result property="message" column="message" jdbcType="VARCHAR"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,log_type,log_name,
+        user_id,username,class_name,
+        method_name,succeed,message,
+        gmt_create
+    </sql>
+</mapper>

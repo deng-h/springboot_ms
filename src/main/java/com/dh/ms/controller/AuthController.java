@@ -1,6 +1,7 @@
 package com.dh.ms.controller;
 
 import com.dh.ms.common.result.Result;
+import com.dh.ms.log.anno.LoginLog;
 import com.dh.ms.security.jwt.JwtTokenManager;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,11 +23,13 @@ public class AuthController {
     @Autowired
     private JwtTokenManager jwtTokenManager;
 
+    @LoginLog
     @ApiOperation(value = "登录",notes = "生成token")
     @PostMapping("/login")
     public Result login(@RequestParam String username, @RequestParam String password) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-        Authentication authentication = authenticationManager.authenticate(authenticationToken);  // 进行用户认证
+        // 进行用户认证
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtTokenManager.createToken(authentication);
         return Result.success("Bearer " + token);

@@ -18,7 +18,7 @@ import com.dh.ms.pojo.vo.menu.MenuVO;
 import com.dh.ms.pojo.vo.menu.ResourceVO;
 import com.dh.ms.pojo.vo.menu.RouteVO;
 import com.dh.ms.service.SysMenuService;
-import com.dh.ms.mapper.SysMenuMapper;
+import com.dh.ms.mapper.system.SysMenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +56,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         return resources;
     }
 
+    // 获取所有菜单数据
     @Override
     public List<RouteVO> listRoutes() {
         List<RouteBO> menuList = this.baseMapper.listRoutes();
@@ -66,7 +67,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     /**
      * 递归生成菜单路由层级列表
      *
-     * @param parentId 父级ID
+     * @param parentId 根节点ID
      * @param menuList 菜单列表
      * @return
      */
@@ -75,6 +76,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         Optional.ofNullable(menuList).ifPresent(menus -> menus.stream()
                 .filter(menu -> menu.getParentId().equals(parentId))
                 .forEach(menu -> {
+                    // 顶层父级的一些设置
                     RouteVO routeVO = new RouteVO();
 
                     MenuTypeEnum menuTypeEnum = menu.getType();
@@ -83,17 +85,18 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                         routeVO.setName(menu.getPath()); //  根据name路由跳转 this.$router.push({name:xxx})
                     }
                     routeVO.setPath(menu.getPath()); // 根据path路由跳转 this.$router.push({path:xxx})
-                    routeVO.setRedirect(menu.getRedirectUrl());
-                    routeVO.setComponent(menu.getComponent());
+                    routeVO.setRedirect(menu.getRedirectUrl());  // 父目录需要有重定向的URL
+                    routeVO.setComponent(menu.getComponent());  // 设置组件的目录/views/xxx/xxx/index.vue
 
                     RouteVO.Meta meta = new RouteVO.Meta();
                     meta.setTitle(menu.getName());
                     meta.setIcon(menu.getIcon());
                     meta.setRoles(menu.getRoles());
                     meta.setHidden(StatusEnum.DISABLE.getValue().equals(menu.getVisible()));
-                    meta.setKeepAlive(true);
+                    meta.setKeepAlive(true);  // 页面缓存开启状态
 
                     routeVO.setMeta(meta);
+                    // 子节点遍历
                     List<RouteVO> children = recurRoutes(menu.getId(), menuList);
                     // 含有子节点的目录设置为可见
                     boolean alwaysShow = CollectionUtil.isNotEmpty(children) && children.stream().anyMatch(item -> item.getMeta().getHidden().equals(false));
@@ -138,7 +141,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                 .orderByAsc(SysMenu::getSort)
         );
 
-        Set<Long> cacheMenuIds = menus.stream().map(menu -> menu.getId()).collect(Collectors.toSet());
+        Set<Long> cacheMenuIds = menus.stream().map(SysMenu::getId).collect(Collectors.toSet());
 
         List<MenuVO> list = menus.stream().map(menu -> {
             Long parentId = menu.getParentId();

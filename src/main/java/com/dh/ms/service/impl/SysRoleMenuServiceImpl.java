@@ -3,7 +3,7 @@ package com.dh.ms.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dh.ms.pojo.entity.SysRoleMenu;
 import com.dh.ms.service.SysRoleMenuService;
-import com.dh.ms.mapper.SysRoleMenuMapper;
+import com.dh.ms.mapper.system.SysRoleMenuMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

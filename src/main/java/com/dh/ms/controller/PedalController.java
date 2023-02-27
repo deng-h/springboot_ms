@@ -2,6 +2,7 @@ package com.dh.ms.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.dh.ms.common.result.PageResult;
+import com.dh.ms.log.anno.BusinessLog;
 import com.dh.ms.pojo.entity.PedalFixedParam;
 import com.dh.ms.pojo.entity.PedalRealParam;
 import com.dh.ms.pojo.query.PedalPageQuery;
@@ -25,6 +26,7 @@ public class PedalController {
     @Autowired
     private PedalRealParamService realParamService;
 
+    @BusinessLog(value = "踏板固定参数分页列表")
     @ApiOperation(value = "踏板固定参数分页列表")
     @GetMapping("/fixed/pages")
     public PageResult<PedalFixedParam> listFixedParamPages(PedalPageQuery queryParams){

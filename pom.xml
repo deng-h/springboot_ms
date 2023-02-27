@@ -19,7 +19,7 @@
 		<hutool.version>5.7.21</hutool.version>
 		<mapstruct.version>1.5.2.Final</mapstruct.version>
 		<mybatis-plus.version>3.5.2</mybatis-plus.version>
-		<swagger..version>1.6.6</swagger..version>
+		<swagger.version>1.6.6</swagger.version>
 	</properties>
 	<dependencies>
 
@@ -43,6 +43,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
 		<dependency>
@@ -96,6 +101,7 @@
 			<artifactId>jjwt-api</artifactId>
 			<version>${jjwt.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-impl</artifactId>
@@ -124,7 +130,7 @@
 		<dependency>
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-annotations</artifactId>
-			<version>${swagger..version}</version>
+			<version>${swagger.version}</version>
 		</dependency>
 
 		<dependency>
@@ -133,11 +139,11 @@
 			<version>3.4.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-devtools</artifactId>-->
+<!--			<optional>true</optional>-->
+<!--		</dependency>-->
 
 	</dependencies>
 

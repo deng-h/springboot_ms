@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dh.ms.pojo.entity.SysUserRole;
 import com.dh.ms.service.SysUserRoleService;
-import com.dh.ms.mapper.SysUserRoleMapper;
+import com.dh.ms.mapper.system.SysUserRoleMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,7 +69,6 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
             }
         }
         return true;
-
     }
 }
 

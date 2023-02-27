@@ -1,6 +1,6 @@
 package com.dh.ms.service.impl;
 
-import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -22,8 +22,8 @@ import com.dh.ms.service.SysMenuService;
 import com.dh.ms.service.SysRoleService;
 import com.dh.ms.service.SysUserRoleService;
 import com.dh.ms.service.SysUserService;
-import com.dh.ms.mapper.SysUserMapper;
-import com.dh.ms.util.SecurityUtils;
+import com.dh.ms.mapper.system.SysUserMapper;
+import com.dh.ms.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -88,8 +88,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         UserAuthInfo userAuthInfo = this.baseMapper.getUserAuthInfo(username);
         if(userAuthInfo != null){
             Set<String> roles = userAuthInfo.getRoles();
-            if(CollectionUtil.isNotEmpty(roles)){
-                Set<String> perms = this.menuService.listRolePerms(roles);  // 根据角色查询权限信息
+            if(CollUtil.isNotEmpty(roles)){
+                // 查询该角色的权限信息
+                Set<String> perms = this.menuService.listRolePerms(roles);
                 userAuthInfo.setPerms(perms);
             }
         }
@@ -216,11 +217,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public boolean deleteUsers(String idsStr) {
         Assert.isTrue(StrUtil.isNotBlank(idsStr), "删除的用户数据为空");
         // 逻辑删除
-        List<Long> ids = Arrays.asList(idsStr.split(",")).stream()
+        List<Long> ids = Arrays.stream(idsStr.split(","))
                 .map(idStr -> Long.parseLong(idStr)).collect(Collectors.toList());
         boolean result = this.removeByIds(ids);
         return result;
-
     }
 
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dh.ms.mapper.midProduct.InitProductStorageMapper">
+
+    <resultMap id="BaseResultMap" type="com.dh.ms.midProduct.entity.InitProductStorage">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="productId" column="product_id" jdbcType="VARCHAR"/>
+            <result property="stocks" column="stocks" jdbcType="BIGINT"/>
+            <result property="adminName" column="admin_name" jdbcType="VARCHAR"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,product_id,stocks,
+        admin_name,is_deleted,gmt_create,
+        gmt_modified
+    </sql>
+
+    <select id="listMidProdInitProdPages" resultType="com.dh.ms.midProduct.bo.InitProdStorageBO">
+        SELECT
+            ist.id,
+            ist.product_id,
+            ist.stocks,
+            ist.admin_name,
+            ist.gmt_create,
+            ist.gmt_modified,
+            mm.model,
+            mm.name,
+            mc.name AS cname
+        FROM
+            `init_product_storage` as ist
+                INNER JOIN `mid_product_model` AS mm ON ist.product_id = mm.id
+                INNER JOIN `mid_product_category` AS mc ON mm.category_id = mc.id
+                INNER JOIN (SELECT max(gmt_modified) AS gmt_modified, product_id FROM `init_product_storage` GROUP BY product_id) AS temp
+                ON temp.product_id = ist.product_id AND temp.gmt_modified = ist.gmt_modified
+        <where>
+            ist.is_deleted = 0
+            <if test='model != null and model.trim() neq ""'>
+                AND(
+                    mm.model LIKE CONCAT('%',#{model},'%')
+                )
+            </if>
+        </where>
+        ORDER BY ist.gmt_modified DESC
+    </select>
+    <select id="getMidProdInitProdDetailById" resultType="com.dh.ms.midProduct.bo.InitProdStorageBO">
+        SELECT
+            ist.id,
+            ist.product_id,
+            ist.stocks,
+            ist.admin_name,
+            ist.gmt_create,
+            ist.gmt_modified,
+            mm.model,
+            mm.name,
+            mc.name AS cname
+        FROM
+            `init_product_storage` as ist
+            INNER JOIN `mid_product_model` AS mm ON ist.product_id = mm.id
+            INNER JOIN `mid_product_category` AS mc ON mm.category_id = mc.id
+            INNER JOIN (SELECT max(gmt_modified) AS gmt_modified, product_id FROM `init_product_storage` GROUP BY product_id) AS temp
+            ON temp.product_id = ist.product_id AND temp.gmt_modified = ist.gmt_modified
+        WHERE
+            ist.is_deleted = 0 AND ist.id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dh.ms.mapper.midProduct.MidProductPlansettingMapper">
+
+    <resultMap id="BaseResultMap" type="com.dh.ms.midProduct.entity.MidProductPlansetting">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="deviceId" column="device_id" jdbcType="VARCHAR"/>
+            <result property="productId" column="product_id" jdbcType="VARCHAR"/>
+            <result property="scheQuantity" column="sche_quantity" jdbcType="INTEGER"/>
+            <result property="startTime" column="start_time" jdbcType="TIMESTAMP"/>
+            <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,device_id,product_id,
+        sche_quantity,start_time,end_time,
+        is_deleted,gmt_create,gmt_modified
+    </sql>
+    <select id="getMidPlanSettingBO" resultType="com.dh.ms.midProduct.bo.MidPlanSettingBO">
+        SELECT
+            ps.id,
+            ps.device_id,
+            ps.product_id,
+            ps.sche_quantity,
+            ps.start_time,
+            ps.end_time,
+            ps.gmt_create,
+            ps.gmt_modified,
+            mm.model,
+            mm.name,
+            mc.name AS cname
+        FROM
+            `mid_product_plansetting` AS ps
+                LEFT JOIN `mid_product_model` AS mm ON ps.product_id = mm.id
+                LEFT JOIN `mid_product_category` AS mc ON mm.category_id = mc.id
+        <where>
+            ps.is_deleted = 0
+            <if test='deviceAddr != null and deviceAddr.trim() neq ""'>
+                AND(
+                    mm.model LIKE CONCAT('%',#{deviceAddr},'%')
+                )
+            </if>
+        </where>
+        ORDER BY
+            ps.gmt_modified DESC
+    </select>
+</mapper>

@@ -15,7 +15,7 @@ import com.dh.ms.pojo.form.DeptForm;
 import com.dh.ms.pojo.query.DeptQuery;
 import com.dh.ms.pojo.vo.dept.DeptVO;
 import com.dh.ms.service.SysDeptService;
-import com.dh.ms.mapper.SysDeptMapper;
+import com.dh.ms.mapper.system.SysDeptMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

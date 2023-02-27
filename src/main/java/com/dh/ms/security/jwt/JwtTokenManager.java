@@ -1,6 +1,6 @@
 package com.dh.ms.security.jwt;
 
-import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import com.dh.ms.security.userdetails.SysUserDetails;
 import io.jsonwebtoken.Claims;
@@ -29,13 +29,18 @@ import java.util.stream.Collectors;
 @Component
 public class JwtTokenManager {
 
+    // secret key.
     @Value("${auth.token.secret_key}")
-    private String secretKey;  // secret key.
+    private String secretKey;
 
+    /*
+     *  Token validity time(seconds).
+     */
     @Value("${auth.token.token_validity}")
-    private long tokenValidity;  // Token validity time(seconds).
+    private long tokenValidity;
 
-    private byte[] secretKeyBytes;  // secret key byte array.
+    // secret key byte array.
+    private byte[] secretKeyBytes;
 
     private JwtParser jwtParser;
 
@@ -94,7 +99,7 @@ public class JwtTokenManager {
 
         // 权限数据过多放置在redis
         Set<String> perms = (Set<String>) redisTemplate.opsForValue().get("USER_PERMS:" + claims.get("userId"));
-        if (CollectionUtil.isNotEmpty(perms)) {
+        if (CollUtil.isNotEmpty(perms)) {
             List<GrantedAuthority> permAuthorities = perms.stream()
                     .map(perm -> new SimpleGrantedAuthority(perm))
                     .collect(Collectors.toList());
